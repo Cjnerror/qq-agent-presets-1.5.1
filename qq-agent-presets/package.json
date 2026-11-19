@@ -1,0 +1,65 @@
+{
+  "name": "qq-agent-presets",
+  "displayName": "QQ 小鲸鱼（角色预设 + 模式设置 + 控制面板）",
+  "version": "1.5.1",
+  "description": "把 QQ 小号接进 DeepSeek Harness 当聊天角色：两代 preset（单会话 / 群聊仿真），工具守卫只放行 QQ 桥接工具，qq-mode 决定运行模式与管理员。另带七节「小鲸鱼」面板：生命开关与掉线看护（自动重启、唤醒调整、免打扰时段、合盖保活）、花费与模型（换模型与思考档位、锁定默认模型）、运行模式、表情与语音、会话、人格、眼睛（看聊天图片、就地回一句）。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./mode": "./mode.js",
+    "./client": "./client.js",
+    "./icon": "./icon.svg",
+    "./locale/*.json": "./locale/*.json",
+    "./qq-tool-restrict.mjs": "./qq-tool-restrict.mjs",
+    "./qq-self-key.mjs": "./qq-self-key.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE.md",
+    "README.md",
+    "client.js",
+    "icon.svg",
+    "index.js",
+    "locale/*.json",
+    "mode.js",
+    "presets/*.patch.yml",
+    "qq-mode.patch.yml",
+    "qq-panel.patch.yml",
+    "qq-self-key.mjs",
+    "qq-tool-restrict.mjs",
+    "scripts/quiet-lid.ps1",
+    "scripts/tts-kokoro.cjs",
+    "scripts/tts-sapi.ps1"
+  ],
+  "icon": "./icon.svg",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": [
+        "./qq-panel.patch.yml",
+        "./qq-mode.patch.yml",
+        "./presets/qq-chat.patch.yml",
+        "./presets/qq-chat-v2.patch.yml"
+      ]
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "slots"
+      ],
+      "external": [
+        "react"
+      ]
+    }
+  }
+}
